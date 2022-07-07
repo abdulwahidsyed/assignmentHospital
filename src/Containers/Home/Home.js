@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { btnWrapper } from "./Style";
+import { btnWrapper, layout } from "./Home.style";
 import { users as usersMock, headItems } from "../../Mocks/userMock";
 import { Button } from "@mui/material";
 import CustomTable from "./CustomTable/CustomTable";
@@ -36,7 +36,7 @@ const Home = () => {
     setOpenAddUserModal(false);
     setOpenMoreDetailsModal(false);
     setEditable(false);
-  }
+  };
 
   const rows = users.map((user) => createData(user));
 
@@ -46,7 +46,6 @@ const Home = () => {
     setSelectedUser(selUser);
   };
 
-
   const saveHandler = () => {
     let updatedUsers = [];
     const newUser = {};
@@ -55,16 +54,15 @@ const Home = () => {
     });
 
     if (editable) {
-      updatedUsers = users.map(user => {
-        debugger
+      updatedUsers = users.map((user) => {
         if (user.id === selectedUser.id) {
-          return {...newUser};
+          return { ...newUser };
         }
-        return {...user};
-      })
+        return { ...user };
+      });
     } else {
       updatedUsers = [...users, newUser];
-    };
+    }
     setShowLoader(true);
     setOpenAddUserModal(false);
 
@@ -72,7 +70,7 @@ const Home = () => {
       setShowLoader(false);
       setUsers(updatedUsers);
       closeAllModals();
-      setInputs({...enterNewEntryInputs});
+      setInputs({ ...enterNewEntryInputs });
     }, 1000);
   };
 
@@ -87,31 +85,33 @@ const Home = () => {
   };
 
   const editHandler = () => {
-    const oldInputs = {...inputs};
+    const oldInputs = { ...inputs };
     for (const key in inputs) {
-      oldInputs[key] = {...oldInputs[key], value: selectedUser[key]}
+      oldInputs[key] = { ...oldInputs[key], value: selectedUser[key] };
     }
     setEditable(true);
     setOpenMoreDetailsModal(false);
     setOpenAddUserModal(true);
     setInputs(oldInputs);
-  }
+  };
 
   const deleteHandler = () => {
     setShowLoader(true);
     setOpenAddUserModal(false);
     setOpenMoreDetailsModal(false);
 
-    const updatedUsres = users.filter(user => user.patientId !== selectedUser.patientId)
+    const updatedUsres = users.filter(
+      (user) => user.patientId !== selectedUser.patientId
+    );
 
     setTimeout(() => {
       setShowLoader(false);
       setUsers(updatedUsres);
     }, 1000);
-  }
+  };
 
   return (
-    <React.Fragment>
+    <div style={layout}>
       <Loader showLoader={showLoader} setShowLoader={setShowLoader} />
       <CustomTable
         rows={rows}
@@ -133,10 +133,16 @@ const Home = () => {
         editHandler={editHandler}
         deleteHandler={deleteHandler}
       />
-      <Button variant="contained" onClick={() => {setOpenAddUserModal(true)}} sx={btnWrapper}>
+      <Button
+        variant="contained"
+        onClick={() => {
+          setOpenAddUserModal(true);
+        }}
+        sx={btnWrapper}
+      >
         Add Record
       </Button>
-    </React.Fragment>
+    </div>
   );
 };
 

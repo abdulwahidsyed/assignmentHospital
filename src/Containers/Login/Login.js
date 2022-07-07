@@ -8,13 +8,11 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
 
-import "./Login.css";
 import { loginInputs } from "../../Utils/inputUtils";
 
 const Login = () => {
   const navigate = useNavigate();
-const k = loginInputs
-  const [inputs, setInputs] = useState({...loginInputs});
+  const [inputs, setInputs] = useState({ ...loginInputs });
 
   const handleChange = (event) => {
     const value = event.target.value;

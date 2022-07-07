@@ -48,6 +48,7 @@ const AddUserModal = ({
               const input = inputs[name];
               return (
                 <TextField
+                  key={name}
                   name={name}
                   required={input.required}
                   id={input.id}
