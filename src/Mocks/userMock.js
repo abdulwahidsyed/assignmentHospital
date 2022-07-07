@@ -83,4 +83,5 @@ export const headItems = {
   mobileNumber: "Mobile No.",
   address: "Address",
   profilePicture: "Profile Picture",
+  id: 'ID'
 };

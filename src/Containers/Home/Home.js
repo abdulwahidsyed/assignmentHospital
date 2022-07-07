@@ -48,10 +48,11 @@ const Home = () => {
 
   const saveHandler = () => {
     let updatedUsers = [];
-    const newUser = {};
+    const newUser = {id: Math.random()};
     Object.keys(inputs).forEach((key) => {
       newUser[key] = inputs[key].value;
     });
+    debugger
 
     if (editable) {
       updatedUsers = users.map((user) => {

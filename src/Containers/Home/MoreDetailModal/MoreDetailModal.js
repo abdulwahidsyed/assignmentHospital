@@ -46,6 +46,9 @@ const MoreDetailModal = ({ openModal, setOpenModal, selectedUser, deleteHandler,
           </Box>
           <Box sx={container}>
             {Object.keys(selectedUser).map((key) => {
+              if (key === 'id') {
+                return null
+              }
               return (
                 <Stack direction="row" spacing={2} sx={costomStack}>
                   <Item sx={{flexBasis: '50%', fontWeight: '600'}}>{headItems[key]}</Item>

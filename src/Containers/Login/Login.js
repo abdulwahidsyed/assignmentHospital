@@ -9,10 +9,12 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
 
 import { loginInputs } from "../../Utils/inputUtils";
+import Loader from "../../Components/Loader/Loader";
 
 const Login = () => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({ ...loginInputs });
+  const [showLoader, setShowLoader] = React.useState(false);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -37,12 +39,14 @@ const Login = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve();
-      }, 0);
+      }, 1000);
     });
   };
 
   const onSubmit = async () => {
+    setShowLoader(true);
     await submitForm();
+    setShowLoader(false);
     navigate("/home");
   };
 
@@ -55,6 +59,7 @@ const Login = () => {
       noValidate
       autoComplete="off"
     >
+      <Loader showLoader={showLoader} />
       {Object.keys(inputs).map((name) => {
         const input = inputs[name];
         return (
